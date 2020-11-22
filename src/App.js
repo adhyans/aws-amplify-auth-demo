@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Router } from "@reach/router";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import Login from "./Login";
+import Join from "./Join";
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+  :root {
+    --primary: #005C96;
+    --background: #F6F8FF;
+    --textColor: #000000;
+    --footerColor: #222222;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body, button, p, h1, h2, h3, h4, h5, h6 {
+    font-family: Poppins, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  input {
+    font-family: Poppins, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+`;
+
+const theme = {
+  primary: "#005C96",
+  background: "#F6F8FF",
+  textColor: "#000000",
+  footerColor: "#222222"
+};
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <Join path="/" />
+        <Login path="/login" />
+      </Router>
+    </ThemeProvider>
   );
 }
-
-export default App;
